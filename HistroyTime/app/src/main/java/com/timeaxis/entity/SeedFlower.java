@@ -1,0 +1,33 @@
+package com.timeaxis.entity;
+
+import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.util.Log;
+import android.view.MotionEvent;
+
+import com.timeaxis.model.Sprite;
+import com.timeaxis.model.Touchable;
+
+/**
+ * Created by miaomiao on 2017/12/17.
+ */
+
+public class SeedFlower extends Sprite implements Touchable {
+    public SeedFlower(Bitmap defaultBitmap, Point position) {
+        super(defaultBitmap, position);
+    }
+
+    @Override
+    public boolean onTouch(MotionEvent event) {
+
+        int x = (int) event.getX();
+        int y = (int) event.getY();
+
+        if(touchArea.contains(x,y)){
+            Log.i(TAG,"flower touch");
+            return true;
+        }
+
+        return false;
+    }
+}
