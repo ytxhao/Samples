@@ -1,8 +1,10 @@
 package com.timeaxis.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.miaomiao.histroytime.R;
+import com.timeaxis.entity.CameraHistorySeekBar;
 import com.timeaxis.entity.EmplacePea;
 import com.timeaxis.entity.SeedFlower;
 import com.timeaxis.entity.SeedPea;
@@ -154,8 +157,15 @@ public class TimeAxis  extends SurfaceView implements SurfaceHolder.Callback{
         SeedPea seedPea = new SeedPea(Config.seedPea,
                 new Point((Config.deviceWidth-Config.seedBank.getWidth())/2+Config.seedBank.getWidth()/7*2,0));
 
-        timeAxisLayout2.add(seedFlower);
-        timeAxisLayout2.add(seedPea);
+
+        Bitmap mSeekBar = Bitmap.createBitmap(getWidth()/5, getHeight(), Bitmap.Config.ARGB_8888);
+
+        CameraHistorySeekBar cameraHistorySeekBar = new CameraHistorySeekBar(mSeekBar,
+                new Point(getWidth()/5,0));
+
+        timeAxisLayout2.add(cameraHistorySeekBar);
+//        timeAxisLayout2.add(seedFlower);
+//        timeAxisLayout2.add(seedPea);
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
@@ -219,22 +229,22 @@ public class TimeAxis  extends SurfaceView implements SurfaceHolder.Callback{
 
                 synchronized (syncObject){
                     try {
-//                        Paint paint = new Paint();
-//                        paint.setColor(Color.RED);
-//                        lockCanvas.drawRect(0,0,100,100,paint);
+                        Paint paint = new Paint();
+                        paint.setColor(getResources().getColor(R.color.color_FF102A3A));
+                        lockCanvas.drawRect(0,0,getWidth(),getHeight(),paint);
 //
 //                        man.drawSelf(lockCanvas);
-                        updateData();
-                        lockCanvas.drawBitmap(Config.gameBK,0,0,null);
-                        lockCanvas.drawBitmap(Config.seedBank,(Config.deviceWidth-Config.seedBank.getWidth())/2,0,null);
+//                        updateData();
+//                        lockCanvas.drawBitmap(Config.gameBK,0,0,null);
+//                        lockCanvas.drawBitmap(Config.seedBank,(Config.deviceWidth-Config.seedBank.getWidth())/2,0,null);
 
                         for(Sprite sprite : timeAxisLayout2){
                             sprite.drawSelf(lockCanvas);
                         }
 
-                        for(Sprite sprite : timeAxisLayout1){
-                            sprite.drawSelf(lockCanvas);
-                        }
+//                        for(Sprite sprite : timeAxisLayout1){
+//                            sprite.drawSelf(lockCanvas);
+//                        }
 
 
                     }catch (Exception e){
@@ -247,7 +257,7 @@ public class TimeAxis  extends SurfaceView implements SurfaceHolder.Callback{
                 }
 
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
