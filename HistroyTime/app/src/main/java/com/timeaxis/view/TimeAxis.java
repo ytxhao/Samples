@@ -257,7 +257,7 @@ public class TimeAxis  extends SurfaceView implements SurfaceHolder.Callback{
                 }
 
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(60);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

@@ -251,7 +251,7 @@ public class DateUtil {
     public static String convertStandardTime2Local(String time, boolean useH12) {
         String result = time;
         SimpleDateFormat oldFormat = new SimpleDateFormat("HH:mm");
-        SimpleDateFormat newFormat = new SimpleDateFormat("h:mma");
+        SimpleDateFormat newFormat = new SimpleDateFormat("HH:mm");
         try {
             result = newFormat.format(oldFormat.parse(time));
         } catch (ParseException e) {
